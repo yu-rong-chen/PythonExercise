@@ -1,0 +1,8 @@
+https://10.10.82.10/
+//*[@id="usernameInput"]
+//*[@id="passwordInput"]
+//*[@id="ID_LOGON"]
+https://10.10.93.32/
+//*[@id="usernameInput"]
+//*[@id="passwordInput"]
+//*[@id="ID_LOGON"]
