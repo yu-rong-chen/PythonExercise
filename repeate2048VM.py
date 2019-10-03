@@ -1,30 +1,32 @@
 allguest=[]
 
-FHead = open("C:/Users/chenyur/OneDrive - Hewlett Packard Enterprise/Spring/1705/data/Head.txt", "r")
-fans = open("C:/Users/chenyur/OneDrive - Hewlett Packard Enterprise/Spring/1705/data/ans.txt", "w")
+FHead = open("C:\\Users\\chenyur\\OneDrive - Hewlett Packard Enterprise\\Spring\\modular test\\test report\\1705\\data\\Head.txt", "r")
+fans = open("C:\\Users\\chenyur\\OneDrive - Hewlett Packard Enterprise\\Spring\\modular test\\test report\\1705\\data\\ans.txt", "w")
 fans.write(FHead.read())
 FHead.close()
 fans.close()
 
+guest_num = 20
+repete_num =103 #2047/20~=103
 
-for times in range(205):
-    for num in range (10):
+for times in range(repete_num):
+    for num in range (guest_num):
         print(num)
         A='\t{\n\t'
-        B='\t\t"id": "'+str(num+times*10)+'",\n'
+        B='\t\t"id": "'+str(num+times*guest_num)+'",\n'
 
-        file="C:/Users/chenyur/OneDrive - Hewlett Packard Enterprise/Spring/1705/data/guest"+str(num)+".txt"
+        file="C:\\Users\\chenyur\\OneDrive - Hewlett Packard Enterprise\\Spring\\modular test\\test report\\1705\\data\\guest"+str(num)+".txt"
         f = open(file, "r")
         C=f.read()
         f.close()
         allguest=A+B+C
         
-        fans = open("C:/Users/chenyur/OneDrive - Hewlett Packard Enterprise/Spring/1705/data/ans.txt", "a")
+        fans = open("C:\\Users\\chenyur\\OneDrive - Hewlett Packard Enterprise\\Spring\\modular test\\test report\\1705\\data\\ans.txt", "a")
         fans.write(allguest)
         fans.close()
         
-FTail = open("C:/Users/chenyur/OneDrive - Hewlett Packard Enterprise/Spring/1705/data/Tail.txt", "r")
-fans = open("C:/Users/chenyur/OneDrive - Hewlett Packard Enterprise/Spring/1705/data/ans.txt", "a")
+FTail = open("C:\\Users\\chenyur\\OneDrive - Hewlett Packard Enterprise\\Spring\\modular test\\test report\\1705\\data\\Tail.txt", "r")
+fans = open("C:\\Users\\chenyur\\OneDrive - Hewlett Packard Enterprise\\Spring\\modular test\\test report\\1705\\data\\ans.txt", "a")
 fans.write(FTail.read())
 fans.close()
 FTail.close()
