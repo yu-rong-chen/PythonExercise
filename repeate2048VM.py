@@ -6,11 +6,11 @@ fans.write(FHead.read())
 FHead.close()
 fans.close()
 
-guest_num = 20
-repete_num =103 #2047/20~=103
+guest_num = 10
+repete_num =205 #2047/20~=103
 
 for times in range(repete_num):
-    for num in range (guest_num):
+    for num in range (0,guest_num,1):
         print(num)
         A='\t{\n\t'
         B='\t\t"id": "'+str(num+times*guest_num)+'",\n'
