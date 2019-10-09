@@ -58,15 +58,15 @@ def add_repository(driver,Source,os_type,User,Password):
         
 
 def repository(ID,Num,f,driver):
-        normal_num = 12;NVDIMM_num = 18; """ Be careful Num """
+        normal_num = 14;NVDIMM_num = 18; """ Be careful Num """
         for line in f:
                 Num=Num+1
                 if ID == 'a':
-                        if Num >1 and Num <=8:
+                        if Num >1 and Num <=10:
                                 PerfectVM_URL = line
                                 User = 'root';Password = 'compaq';
                                 add_repository(driver,PerfectVM_URL,1,User,Password)
-                        elif Num>=9 and Num < normal_num:
+                        elif Num>=11 and Num < normal_num:
                                 PerfectVM_URL = line
                                 User = 'Administrator';Password = 'compaq';
                                 add_repository(driver,PerfectVM_URL,2,User,Password)
