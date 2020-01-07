@@ -93,10 +93,10 @@ tb1 = pt.PrettyTable()
 tb1.field_names = ["IP", "RNVDIMM", "NV_Num", "RDIMM", "RD_Num", "Storage", "Storage_Num"]
 
 
-##Input1 = input("a. Gen 10\nb. Gen 8/9:\n")
-##Input2 = input("Input iLo IP:\n")
+Input1 = input("a. Gen 10\nb. Gen 8/9:\n")
+Input2 = input("Input iLo IP:\n")
 
-Input2='10.10.101.33'
+# Input2='10.10.101.33'
 Input1 = 'a'
 if  Input1 == 'a':
 

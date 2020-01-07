@@ -100,7 +100,7 @@ if  Input == 'a':
 elif Input == 'b':
     i=0
     #Question = input('')
-    F2 = open("C:/Users/chenyur/Documents/Lynda/PythonExercise/iLO.txt")
+    F2 = open("C:/Users/chenyur/Documents/Lynda/github/PythonExercise/iLO.txt")
     Gen10 = F2.readline()
     #Gen10 = input("Please input IP:\n")
     
@@ -110,7 +110,11 @@ elif Input == 'b':
         #WebUrl  = 'https://'+Gen10+'/'
         WebUrl  = Gen10
         driver.get(WebUrl)
-               
+
+        driver.find_element_by_xpath("//*[@id='details-button']").click()
+        WebdriverLoad(driver,"//*[@id='proceed-link']")
+        driver.find_element_by_xpath("//*[@id='proceed-link']").click()
+
         driver.switch_to.frame(driver.find_element_by_xpath("//*[@id='appFrame']"))
         WebdriverLoad(driver,"//*[@id='username']")
         driver.find_element_by_xpath("//*[@id='username']").send_keys(UserName)
