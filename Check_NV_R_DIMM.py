@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 import certifi
 import html5lib  #pure-python library for parsing HTML
 import prettytable as pt
+import os #ask for current working directory
 
 
 driver = webdriver.Chrome()
@@ -89,7 +90,8 @@ tb1.field_names = ["IP", "RNVDIMM", "NV_Num", "RDIMM", "RD_Num"]
 ##Input = input("Choose sersion\na. Gen 8 and 9\nb. Gen 10:\n")
 Input='b'
 if  Input == 'a':
-    F1 = open("C:/Users/chenyur/Documents/Lynda/PythonExercise/Gen89.txt")
+    CWD=os.getcwd()
+    F1 = open(CWD+"\\Gen89.txt")
     Gen89 = F1.readline()
 
     WebdriverLoad(driver,Login)
@@ -100,7 +102,8 @@ if  Input == 'a':
 elif Input == 'b':
     i=0
     #Question = input('')
-    F2 = open("C:/Users/chenyur/Documents/Lynda/github/PythonExercise/iLO.txt")
+    CWD=os.getcwd()
+    F2 = open(CWD+"\\iLO.txt")
     Gen10 = F2.readline()
     #Gen10 = input("Please input IP:\n")
     
