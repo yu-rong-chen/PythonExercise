@@ -9,9 +9,11 @@
 <p>linux command
 <pre><code>ssh-keygens</code></pre>
 
+Reference from [ssh.com](https://www.ssh.com/ssh/protocol "SSH key")
+************
 # git command
 > User need to set account
 > 
-<prep><code>git config --global user.email "you@example.com"</code></prep>
+<prep><code>git config --global user.email "you@example.com"
 
-<prep><code>git config --global user.name "Your Name"</code></prep>
+git config --global user.name "Your Name"</code></prep>
