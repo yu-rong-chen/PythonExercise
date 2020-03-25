@@ -10,3 +10,8 @@
 <pre><code>ssh-keygens</code></pre>
 
 # git command
+> User need to set account
+> 
+<prep><code>git config --global user.email "you@example.com"</code></prep>
+
+<prep><code>git config --global user.name "Your Name"</code></prep>
