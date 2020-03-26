@@ -9,7 +9,13 @@
 ### Generate ssh key on linux
 <p>Generating public/private rsa key pair in <code>~/.ssh</code>.
 <pre><code>ssh-keygens</code></pre>
-<p>This command will generate two file <code>id_rsa</code> and <code>id_rsa.pub</code> in <code>~/.ssh</code> folder. 
+<p>This command will generate two file <code>id_rsa</code> and <code>id_rsa.pub</code> in <code>~/.ssh</code> folder. Public key will generate in <code>id_rsa.pub</code>. It will be put on remote linux server which user want to access. User can distinguish from the file name <code>.pub</code>. There are two ways to put pulic key to remote linux server.
+
+1. <p>Copy the content of <code>id_rsa.pub</code> to <code>~/.ssh/authorized_keys</code></p>
+   <prep><code>ssh USER@HOST 'mkdir -p ~/.ssh;cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_rsa.pub</code></prep>
+2. <p>Using comand <code>ssh-copy-id</code>
+   <prep><code>ssh-copy-id USER@HOST</code></prep>
+   <prep><code>ssh-copy-id -i ~/.ssh/id_rsa.pub USER@HOST</code> to specify the key</prep>
 
 Reference from [ssh.com](https://www.ssh.com/ssh/protocol "SSH key")
 ************
