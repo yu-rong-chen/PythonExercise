@@ -19,7 +19,8 @@
 
 <p>The more safer way for SSH login is forbidden using password to login and only allow login by ssh key. Change the setting in <code>/etc/ssh/sshd_config</code>
 <pre><code>PasswordAuthentication no
-PubkeyAuthentication yes</code></pre>
+PubkeyAuthentication yes</code></pre> 
+<p>Restart <code>sshd</code>. <code>/etc/init.d/sshd restart</code>
 
 Reference from [ssh.com](https://www.ssh.com/ssh/protocol "SSH key")
 ************
@@ -27,5 +28,4 @@ Reference from [ssh.com](https://www.ssh.com/ssh/protocol "SSH key")
 > User need to set account
 > 
 <prep><code>git config --global user.email "you@example.com"
-
 git config --global user.name "Your Name"</code></prep>
