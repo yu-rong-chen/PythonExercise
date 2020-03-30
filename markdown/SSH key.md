@@ -29,3 +29,6 @@ Reference from [ssh.com](https://www.ssh.com/ssh/protocol "SSH key")
 > 
 <prep><code>git config --global user.email "you@example.com"
 git config --global user.name "Your Name"</code></prep>
+<p>hook up the Git repository on your computer to the one up on GitHub
+<prep><code>git remote add origin https://github.com/<your-github-username>/my-first-blog.git
+git push -u origin master</code></prep>
