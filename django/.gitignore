@@ -1,8 +1,0 @@
-*.pyc
-*~
-/.vscode
-__pycache__
-project1
-db.sqlite3
-/static
-.DS_Store
