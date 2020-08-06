@@ -23,6 +23,27 @@ PubkeyAuthentication yes</code></pre>
 <p>Restart <code>sshd</code>. <code>/etc/init.d/sshd restart</code>
 
 Reference from [ssh.com](https://www.ssh.com/ssh/protocol "SSH key")
+
+## Open remote windows on visual code
+
+### install OpenSSH on client
+Option 1:
+
+Settings -> APP -> APP & Feature -> Manage optional features -> Add a feateure -> Install OpenSSH client
+
+Option 2:
+
+Install using powershell
+
+[Reference](https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse "Microsoft Document")
+
+### Make sure remote VM can use command wget
+
+$cat > ~/.wgetrc
+use_proxy = on
+http_proxy = ....
+https_proxy = ....
+
 ************
 # git command
 > User need to set account

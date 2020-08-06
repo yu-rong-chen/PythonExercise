@@ -6,7 +6,7 @@
 <p>Create a virtual environment<prep><code>python3 -m venv _*env*_</code></prep>
 <p>Activate a virtual environment<prep><code>source "env"/bin/activate</code></prep>
 <p>Leave the virtual environment<prep><code>deactivate</code></prep>
-<p>uprade <code>pip</code> to latest version<prep><code>pip --proxy _*http://web-proxy.sgp.hpecorp.....*_ install --upgrate pip</code></prep>
+<p>uprade <code>pip</code> to latest version<prep><code>pip --proxy http://web-proxy.sgp.hpecorp..... install --upgrate pip</code></prep>
 
 ### deploy on Internet
 <p>Ignore some file from git tracking
