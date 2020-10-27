@@ -1,46 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.1.2 (Python 3.6.8 on win32)" generated="20191119 17:48:52.406" rpa="false">
-<suite id="s1" name="First" source="C:\Users\chenyur\Documents\Lynda\github\PythonExercise\RobotPractice\tests\first.robot">
+<robot generator="Robot 3.1.2 (Python 3.6.8 on win32)" generated="20200215 11:20:17.231" rpa="false">
+<suite id="s1" name="Browser" source="C:\Users\chenyur\Documents\Lynda\github\PythonExercise\RobotPractice\tests\browser.robot">
 <test id="s1-t1" name="User must sign in to check out">
 <kw name="Calls python Keywords">
 <kw name="Open Browser" library="SeleniumLibrary">
 <doc>Opens a new browser instance to the given ``url``.</doc>
 <arguments>
-<arg>https://10.10.124.7/#/job/show/overview/r/rest/vtc/jobs/9</arg>
+<arg>${Login URL}</arg>
 <arg>chrome</arg>
 </arguments>
-<msg timestamp="20191119 17:48:53.914" level="INFO">Opening browser 'chrome' to base url 'https://10.10.124.7/#/job/show/overview/r/rest/vtc/jobs/9'.</msg>
-<kw name="Capture Page Screenshot" library="SeleniumLibrary">
-<doc>Takes screenshot of the current page and embeds it into log file.</doc>
-<msg timestamp="20191119 17:49:00.116" level="INFO">Cannot capture screenshot because no browser is open.</msg>
-<status status="PASS" starttime="20191119 17:49:00.115" endtime="20191119 17:49:00.116"></status>
+<msg timestamp="20200215 11:20:18.193" level="INFO">Opening browser 'chrome' to base url 'https://kimconnect.com/how-to-transfer-files-via-ssh-or-winrm/'.</msg>
+<status status="PASS" starttime="20200215 11:20:18.192" endtime="20200215 11:20:27.868"></status>
 </kw>
-<msg timestamp="20191119 17:49:00.138" level="FAIL">SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 76
-</msg>
-<status status="FAIL" starttime="20191119 17:48:53.914" endtime="20191119 17:49:00.138"></status>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<arguments>
+<arg>name=s</arg>
+<arg>Hi</arg>
+</arguments>
+<msg timestamp="20200215 11:20:27.869" level="INFO">Typing text 'Hi' into text field 'name=s'.</msg>
+<status status="PASS" starttime="20200215 11:20:27.869" endtime="20200215 11:20:28.117"></status>
 </kw>
-<status status="FAIL" starttime="20191119 17:48:53.913" endtime="20191119 17:49:00.139"></status>
+<status status="PASS" starttime="20200215 11:20:18.192" endtime="20200215 11:20:28.117"></status>
 </kw>
 <doc>This is some bais info about the test</doc>
 <tags>
 <tag>Smoke</tag>
 </tags>
-<status status="FAIL" starttime="20191119 17:48:53.911" endtime="20191119 17:49:00.142" critical="yes">SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 76
-</status>
+<status status="PASS" starttime="20200215 11:20:18.189" endtime="20200215 11:20:28.120" critical="yes"></status>
 </test>
 <doc>This is some basic info about the whole suite</doc>
-<status status="FAIL" starttime="20191119 17:48:52.421" endtime="20191119 17:49:00.147"></status>
+<status status="PASS" starttime="20200215 11:20:17.238" endtime="20200215 11:20:28.124"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="1">Critical Tests</stat>
-<stat pass="0" fail="1">All Tests</stat>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="0" fail="1">Smoke</stat>
+<stat pass="1" fail="0">Smoke</stat>
 </tag>
 <suite>
-<stat pass="0" fail="1" id="s1" name="First">First</stat>
+<stat pass="1" fail="0" id="s1" name="Browser">Browser</stat>
 </suite>
 </statistics>
 <errors>

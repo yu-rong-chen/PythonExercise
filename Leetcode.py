@@ -284,21 +284,218 @@ A= [[0,0,0],[0,1,0],[0,0,0],[1,1,0]]
 # print(rob)
 
 #---------------------Leetoce 213
-nums=[100,3,1,3]
-# if not nums: return 0
-# if len(nums) == 1: return nums[0]
-# if len(nums) == 2: return max(nums[0],nums[1])
-index=[0 for x in range(len(nums))]
-L = len(nums)
-index[0] = nums[0]
-index[1] = max(index[0],nums[1])
+# nums=[100,3,1,3]
+# # if not nums: return 0
+# # if len(nums) == 1: return nums[0]
+# # if len(nums) == 2: return max(nums[0],nums[1])
+# index=[0 for x in range(len(nums))]
+# L = len(nums)
+# index[0] = nums[0]
+# index[1] = max(index[0],nums[1])
 
-for i in range (2, L):
-    if i==L-1:
-        if L%2 == 0:
-            index[i] = max(nums[i]+index[i-2],index[i-1])
+# for i in range (2, L):
+#     if i==L-1:
+#         if L%2 == 0:
+#             index[i] = max(nums[i]+index[i-2],index[i-1])
+#         else:
+#             index[i] = max(nums[i]+index[i-2]-index[0],index[i-1])
+#     else:
+#         index[i] = max(nums[i]+index[i-2],index[i-1])
+# print(index)
+
+#-----------------Leetcode 94 - binary tree inorder transversal
+#-----------------Leetcode 102 - Binary Tree Order Traversal
+class Node:
+    def __init__(self,data):
+        self.val=data
+        self.left=None 
+        self.right=None 
+        self.last=None
+    def insertdata(self,data):
+        if self.val:
+            if data < self.val:
+                if self.left is None:
+                    self.left = Node(data)
+                else:
+                    self.left.insertdata(data)
+            if data > self.val:
+                if self.right is None:
+                    self.right = Node(data)
+                else:
+                    self.right.insertdata(data)
         else:
-            index[i] = max(nums[i]+index[i-2]-index[0],index[i-1])
-    else:
-        index[i] = max(nums[i]+index[i-2],index[i-1])
-print(index)
+            self.val=data
+    def printTree(self):
+        pointer = self
+        if pointer.left:
+            pointer.left.printTree()
+        print(pointer.val,end=' ')
+        if pointer.right:
+            pointer.right.printTree()
+
+    def inorderTraversal(self,root):
+        #-------------iterative ---
+        # res,curr=[],[]
+        # pointer=root
+        # while curr or pointer:
+        #     while pointer:
+        #         curr.append(pointer)
+        #         pointer = pointer.left
+        #     pointer = curr.pop()
+        #     res.append(pointer.val)
+        #     pointer = pointer.right
+        # return res
+        #--------------recursive ---
+        res= []
+        def dfs(root):
+            if root.left: dfs(root.left)
+            res.append(root.val)
+            if root.right: dfs(root.right)
+        dfs(root)
+        return res
+    def levelOrder(self,root):
+        # #----------------recursive ----
+        # res=[]
+        # if res is None: return res
+        # res.append([]) # Create 2 dimenson list to save the depth and node
+        # def helper(n,res,level):
+        #     if not n: return
+        #     if len(res)-1 < level:  # if res didn't have the list for specific depth, then append directly
+        #         res.append([n.val])
+        #     else: # if res already have the list of specific depth, then append it on specific list
+        #         res[level].append(n.val)
+        #     helper(n.left,res,level+1) # level 1 -> to save root.left and root.right
+        #     helper(n.right,res,level+1)
+        # helper(root,res,0) # level 0 -> len(res) is 1 to save root
+        # return res
+
+        #----------------iterative ----
+        from collections import deque #--------a generalzation of stack and queues
+        res=[]
+        if not root: return res
+        q=deque([root]) #------Node Object is not iteratable, put root in []
+        while q:
+            cnt = len(q) # check how many Node at one level
+            level =[]
+            for _ in range(cnt):
+                n=q.popleft()
+                level.append(n.val)
+                if n.left: q.append(n.left)
+                if n.right: q.append(n.right)
+            res.append(level)
+        return res
+    #----------------700 Search in Binary Search Tree---
+    def BST(self,root,val):
+        #----------iterative-------
+        pointer=root
+        while pointer:
+            if pointer.val > val:
+                pointer = pointer.left
+            elif pointer.val < val:
+                pointer = pointer.right
+            elif pointer.val == val:
+                return pointer
+        return None
+        #------------recursive----------
+        # if not root or root.val == val:
+        #     return root
+        # if root.val > val:
+        #     return self.BST(root.left,val)
+        # else:
+        #     return self.BST(root.right,val)
+
+    #-------------Leetcode 98 Validate Binary Search Tree----
+    def ValidateBST(self,root):
+        #-----iterative
+        # if not root: return True
+        # pre, curr, pointer=None,[],root
+        # while curr or pointer:
+        #     while pointer:
+        #         curr.append(pointer)
+        #         pointer=pointer.left
+        #     pointer=curr.pop()
+        #     if pre and pointer.val <= pre.val:
+        #         return False
+        #     pre = pointer
+        #     pointer=pointer.right
+        # return True 
+
+    #------recursive----
+        if not root: return True
+        if not self.ValidateBST(root.left): return False
+        if self.last and self.last.val >= root.val: return False
+        self.last=root
+        return self.ValidateBST(root.right)
+
+    
+# Head = Node(14)
+# Head.insertdata(9)
+# Head.insertdata(8)
+# Head.insertdata(12)
+# Head.insertdata(13)
+# Head.insertdata(18)
+# Head.insertdata(16)
+# Head.insertdata(19)
+# Head.printTree()
+# print(' ')
+# print(Head.inorderTraversal(Head))
+# print(Head.levelOrder(Head))
+# print(Head.BST(Head,9))
+# print(Head.ValidateBST(Head))
+
+# Test = Node(0)
+# Test.left=None
+# Test.right=Node(-1)
+# print(Test.ValidateBST(Test))
+
+#-------Leetcode 136
+# nums=[4,1,2,1,2]
+
+# res = 0
+# for i in nums:
+#     res ^= i # Bitwise Operation - exclusive OR: 01 and 10 will output 1, otherwise 0
+#     # res = res ^ i
+# print(res)
+
+#------Leetcode 693 binary number with alternating bits
+# '''
+# n         =  1 0 1 0 1 0 1 0
+# n>>1      =  0 1 0 1 0 1 0 1
+# n>>1 ^ n  =  1 1 1 1 1 1 1 1
+# m=n
+# m+1       =1 0 0 0 0 0 0 0 0 
+# (m+1)&m   =0 0 0 0 0 0 0 0 0
+
+# '''
+# n=5
+# m=n>>1 # n binary right shift 1
+# o=n^m # XOR if n and m are different, the result is 1
+# Answer = o & (o+1) # If answer ==1 return True
+
+# n = n ^ (n >> 1)
+# return n & (n+1)
+
+#----------Leetcode 67 Add Binary
+A = '1010'
+B = '101101'
+
+# i,j = len(A)-1, len(B)-1
+# res, c = [],'0'
+
+# while i>=0 or j>=0 or c=='1':
+#     ai = A[i] if i>=0 else '0'
+#     bj = B[j] if j>=0 else '0'
+#     if ai == bj:
+#         res.append(c)
+#         c=ai
+#     else:
+#         res.append('0' if c == '1' else '1')
+#     i = i-1
+#     j=j-1
+# print(res)
+# print(''.join(res[::-1]))
+
+# Leetcode 680 valid Palindrom II
+S = 'abca'
+i, j = 0, len(S)-1
+

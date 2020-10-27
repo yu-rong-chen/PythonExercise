@@ -173,5 +173,71 @@ class Queue:
 # letter = []
 # for i in 'human':
 #     letter.append(i)
-letter = [i for i in 'human'] # list contains the items of the iterable string
-print(letter)
+# letter = [i for i in 'human'] # list contains the items of the iterable string
+# print(letter)
+
+
+#----------------tree traversal-------
+
+# class Node:
+#     def __init__(self,data):
+#         self.data = data
+#         self.left = None
+#         self.right = None
+#     #------insert data (binary tree)--------
+#     def insert(self,data):
+#         if self.data:
+#             if data < self.data:
+#                 if self.left is None:
+#                     self.left = Node(data)
+#                 else:
+#                     self.left.insert(data)
+#             elif data > self.data:
+#                 if self.right is None:
+#                     self.right = Node(data)
+#                 else:
+#                     self.right.insert(data)
+#         else:
+#             self.data=data
+    
+#     def PrintTree(self):
+#         if self.left:
+#             self.left.PrintTree()
+#         print(self.data,end=' ')
+#         if self.right:
+#             self.right.PrintTree()
+#     def inorderTraversal(self,root):
+#         #----root -> left -> right
+#         #Recusive solution is trival, try iterative
+#         # res =[]
+#         # if root:
+#         #    res = self.inorderTraversal(root.left) 
+#         #    res.append(root.data)
+#         #    res = res+ self.inorderTraversal(root.right)
+#         # return res
+#         res = []
+#         if root and root.left == None and root.right == None: return root.data
+#         res, stack=[],[] 
+#         point=root
+#         while point or stack:
+#             while point:
+#                 stack.append(point)
+#                 point=point.left
+#             point=stack.pop()
+#             res.append(point.data)
+#             point=point.right
+        
+#         return res
+
+
+# root=Node(21)
+# root.insert(13)
+# root.insert(18)
+# root.insert(26)
+# root.insert(24)
+# root.insert(23)
+# root.insert(11)
+# root.insert(9)
+# root.PrintTree()
+# print('')
+# print(root.inorderTraversal(root))

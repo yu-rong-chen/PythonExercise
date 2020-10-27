@@ -8,7 +8,7 @@
 > The idea is to have a cryptographic key pair - public key and private key - and configure the public key on a server to authorize access and grant anyone who has a copy of the private key access to the server.
 ### Generate ssh key on linux
 <p>Generating public/private rsa key pair in <code>~/.ssh</code>.
-<pre><code>ssh-keygens</code></pre>
+<pre><code>ssh-keygen</code></pre>
 <p>This command will generate two file <code>id_rsa</code> and <code>id_rsa.pub</code> in <code>~/.ssh</code> folder. Public key will generate in <code>id_rsa.pub</code>. It will be put on remote linux server which user want to access. User can distinguish from the file name <code>.pub</code>. There are two ways to put pulic key to remote linux server.
 
 1. <p>Copy the content of <code>id_rsa.pub</code> to <code>~/.ssh/authorized_keys</code></p>
