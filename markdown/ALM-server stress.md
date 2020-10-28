@@ -14,14 +14,77 @@
 
 [PCIe Link Optimization Test](#PCIe-Link-Optimization-Test)
 
-# Network testing
+# Network testing (61)
 ## Configuration Counts
 * SUT1 IP, username and password
 * SUT2 IP, username and password
 * runtime 1440
 
 Total: 7
-## Xorsyst setup on both client and SUT
+## Call Server Stress - Xorsyst - Step - General Server Setup (16)
+### Set ROM EV (12)
+    *For Gen 10*
+      SET EV (requires EV.EFI - UEFI shell executible tool available from CSI tool/FTP or ROMQA):
+          At UEFI shell prompt: map -r
+          $ EV CQHSIGTH 01 01 00 01 00   
+          $ EV CQHLKRATE 01     
+          $ EV CQHMEMTHR 01 00 01 00 01 00 30 00 32 00 64 00 
+          4 steps
+
+    *DOS (Legacy mode) platforms:*
+      SET EV (requires EV_VINE.COM - DOS tool): 
+          Boot to DOS using USB key. 
+          Run EV_VINE.COM. 
+          Select Add to add an EV.
+          Enter the Environment Variable as: CQHOVRD
+          Enter the Hex Value as: 01 00 01 00 01 00 00 00 00 00 00 00 00 00
+          5 steps
+
+    *UEFI Platforms:*
+      SET EV (requires EV.EFI - UEFI shell executible tool available from CSI tool/FTP or ROMQA): 
+          At UEFI shell prompt: map -r 
+          $ ev cqhovrd 01 00 01 00 05 00 00 00 00 00 00 00 00 00
+          2 steps
+    * reboot
+### Configure server according to test instance details (1)
+### Install SPP (1)
+### Configure Raid and FC/FCoE controllers per test instance details(1)
+### Verify all HW present at OS and server healthy (1)
+
+## Call Server Stress - Xorsyst - Step - Install (X2 for SUT and client) (12)
+### Setup SMBIOS pass-through if installing on a virtual machine (2)
+    * setup SMBIOS pass-through on the guest VM
+    * On an ESXi host, you need to edit the virtual machine configuration file (.vmx) and add this option: SMBIOS.reflectHost = TRUE
+### Windows specific: Disable Windows Defender (1)
+### Obtain Xorsyst distribution and license file for your target system (0)
+### Verify that your target date/time and timezone are accurate (1)
+### Install Perl interpreter on target if it is not present (1)
+### Remove old Xorsyst installation if present (2)
+### Windows specific: Disable Admin Approval Mode (0)
+### Copy Xorsyst distribution and license file to target. Uncompress and place xorsyst.license in the xorsyst directory. (3)
+### Execute 'xorsyst_install' from a shell(2)
+
+## Call Server Stress - Xorsyst - Step - Open Xorsyst shell (3) 
+### Open Xorsyst shell (1)
+    *'su -l xo'
+### Windows Only - Disable "QuickEdit Mode" and "Insert Mode" (1)
+### Verify Xorsyst shell environment healthy (1)
+
+## Using SUT shell created in a previous step, generate xorsystsetup using optimize_mirrortest.pl (1)
+
+## Call Server Stress - Xorsyst - Step - Run and check (10)
+### Call Server Stress - Xorsyst - Step - Open Xorsyst shell (3)
+### Start xorsyst (1)
+### Wait 15 minutes and check results directory for any issues (2)
+    *Look for the presence of xorsyst.err, xorsyst .warn, or any files ending in '.err' or '.dmp' in the current results directory
+### Let the run finish and capture final results (4)
+    * Look for the presence of xorsyst.err, xorsyst.warn, netstat.err, or any files ending in '.err' or '.dmp'. 
+    * Check dmesg.log on linux and err_warn_events.log or the Event Viewer on windows
+
+
+
+
+<!-- ## Xorsyst setup on both client and SUT
 1. Extract contents of xorsyst tool file
 2. Copy license file
 3. Install Xorsyst: `./xorsyst_istall`
@@ -41,9 +104,20 @@ Total: 7
 4. view network performance: `sar –n DEV ?1`
 5. Check mirrortest.summary 
 
-Total: 7+ 7X2+7= 28.
+Total: 7+ 7X2+7= 28. -->
 
 # Xorsyst
+## Call Stress - Xorsyst - Install SUT
+## Call Server Stress - Xorsyst - Step - General Server Setup
+## Call Stress - Xorsyst - Install Client
+## Call Stress - Xorsyst - Setup - SUT and Client NIC setup
+## Generate xorsystsetup on the SUT
+## Configuration Note - use TESTDSKLIST instead of TESTFILELIST for testing large drives iwhen running Endurance
+## Call Stress - Xorsyst - Open Xorsyst shell
+## Edit xorsystsetup
+## Call Stress - Xorsyst - Step - Run and check
+
+
 ## Configuration Counts
 * SUT1 IP, username and password
 * SUT2 IP, username and password
@@ -118,6 +192,35 @@ Total: 9+7+7+16 = 39
 * Install a Window's or Linux's based operating system
 * Install latest HP driver support pack and shipping OS service/support pack 
 * Install the latest PSP or LSP package. 
+* Install ETD Meatgrinder 
+    * execute ETD Meatgrinder
+    * Select "Auto Configure"
+    * Uncheck all areas to test except CPU/Memory. Leave default of "Prevent Peer Transfers Across Buses" selected.
+    * click OK
+
+    * Select "Test options" 
+    * uncheck "Uncacheable" memory (UC).
+    * On Prod/Con test, select Host memory options and uncheck Uncacheable. 
+    * Click OK
+    * Save the file 
+    * kick off the test 
+
+* Install and run ETD Tool
+    * tar zxvf LinuxMG_2.000_archive.tar.gz 
+    * cd Linux MG_2.000_archive # ./setup 
+    * ./start_ driver (optional step)
+    * /MG 
+
+    * Check the error log of ETD 2000 Meatgrinder. 
+    * Check the System Event Viewer of Windows
+    * Error is found in var/log/message. 
+    * No error is found in BIOS event log. 
+    * No error is found in IML or ILO log. 
+    * CPU usage is approximate 100% 
+Total: 26 
+
+
+
 
 # PCIe Link Optimization Test 
 PCIe is used to provide the connections between motherboard peripherals like graphics card, ethernet card,external graphics card, external hard disk to the CPU and main memory.
@@ -131,7 +234,7 @@ PCIe以**串列**通訊系統為個人電腦(PC)內部的匯流排提供更快�
 
 [![interface introduction](https://yt-embed.herokuapp.com/embed?v=NbL231dhnKs)](https://www.youtube.com/watch?v=NbL231dhnKs)
 
-## Basic Set ECC Threshold for Memory Events to Zero
+## Basic Set ECC Threshold for Memory Events to Zero (23 steps)
 
 * RBSU option to set Default system settings
 * disable iLO Security 
@@ -139,56 +242,102 @@ PCIe以**串列**通訊系統為個人電腦(PC)內部的匯流排提供更快�
     6 test set config
 * *For Gen 10*
     SET EV (requires EV.EFI - UEFI shell executible tool available from CSI tool/FTP or ROMQA):
-        5 steps
+        At UEFI shell prompt: map -r
+        $ EV CQHSIGTH 01 01 00 01 00   
+        $ EV CQHLKRATE 01   
+        $ EV CQHMEMTHR 01 00 01 00 01 00 30 00 32 00 64 00 
+        4 steps
+
 * *DOS (Legacy mode) platforms:*
     SET EV (requires EV_VINE.COM - DOS tool): 
+        Boot to DOS using USB key. 
+        Run EV_VINE.COM. 
+        Select Add to add an EV.
+        Enter the Environment Variable as: CQHOVRD
+        Enter the Hex Value as: 01 00 01 00 01 00 00 00 00 00 00 00 00 00
         5 steps
+
 * *UEFI Platforms:*
     SET EV (requires EV.EFI - UEFI shell executible tool available from CSI tool/FTP or ROMQA): 
-        3 steps
+        At UEFI shell prompt: map -r 
+        $ ev cqhovrd 01 00 01 00 05 00 00 00 00 00 00 00 00 00
+        2 steps
 * reboot
-* plus 3 steps
+* Install associated Prolaint Support Pack 
+* Check if Date/time set on the system's operating system and  ILO date time if match. 
+* Verify initial state of SUT
 
-total 25
-## plus 2 steps
+total 23
+## Copy Files && Remove Old Files (2 steps)
 ## Set PLOT-LIN to run on boot.(10 steps)
+    
+    For RHEL: 
+        * $ /PLOT/RHEL8/setup.sh '-d 30 -t 60 -u' 
+        * Add * /PLOT/PLOT-LIN & * to the end
+        * $ chmod +x /etc/rc.d/rc.local
+    For Ubuntu:
+        * Add * /PLOT/PLOT-LIN & * above "exit 0" in "/etc/rc.local"
+    For SLES 15+: 
+        * $ /PLOT/RHEL8/setup.sh '-d 30 -t 60 -u' 
+    For Sles12 +
+        * Add * /PLOT/PLOT-LIN & * to the end
+        * $ chmod +x /etc/init.d/boot.local
 ## install OS (1 steps)
 ## Verify initial report (1)
-## plus 3 steps
+## Run PLOT-LIN && Input number of hours to run program. && Continue the test by entering 1. (3 steps)
 ## allow test to complete (1)
 ## verify test(6)
 Log.txt,ErrorReportXX.txt,dmesg, var/log/messages, no IML events occurred,no ILO events occurred, 
 ## save(1)
-##call (5+6)
+## After test cases completed - Check Logs and Capture &Send the AHS log (9 steps)
 verify all OS logs, IML logs, ILO logs, OA logs. If agents/providers are installed check HP System Management Homepage.
+Capture the AHS log file: 
+    Log in to iLO web page, go to the path Information -> Active health system logs and click the "Download" button to download all Active Health system logs. 
 
 
-### Windows - PLOT OS Reboot
-## Basic Set ECC Threshold for Memory Events to Zero (25 steps)
-### install OS (1 step)
-### Instructions for Windows without GUI (14 steps)
-### Copy files (2 steps)
-### Remove old files (1 step)
-### Set PLOT-WIN to run on startup.(17 steps)
-### Enable automatic log in (5 steps)
-### reboot (1 steps)
-### Run PLOT-WIN.exe (1 steps)
-### Verify initial report (1)
-### plus 3 steps
-### Allow test to complete (1)
-### verify test (3)
-### save (1)
-### call 11
 
 
 # Server Stress - Windows - PLOT OS Reboot
+## Basic Set ECC Threshold for Memory Events to Zero (23 steps)
+## install OS (1 step)
+## Instructions for Windows without GUI (14 steps)
+## Copy files (2 steps)
+## Remove old files (1 step)
+## Set PLOT-WIN to run on startup.+ Windows 10 Task Scheduler (17 steps)
+## Enable automatic log in (5 steps)
+## reboot (1 steps)
+## Run PLOT-WIN.exe + input number of hours to run. (2 steps)
+## Verify initial report (1)
 
-## Basic Set ECC Threshold for Memory Events to Zero (25)
-## 
-##call (5+6)
+## Continue the test by entering 1. (1 steps)
+## Allow test to complete (1)
+## verify test (3)
+## save (1)
+## call 9 
 
 
-# STM linkpack
+
+# STM linkpack (45)
+## Basic Set ECC Threshold for Memory Events to Zero (23 steps)
+## OS setup (3)
+    * Install SLES 12 SP2 x64
+    * select the installation of C/C++ Compiler and Tools
+    * deselect the installation of Novell App Armor 
+## SW Installation- Install the 3 rpms (1)
+## SW Configuration (1)
+## HASP Config (4)
+    * Copy the aksusbd file to /opt/hpe/SystemTestManager
+    * $ mount --bind /dev/bus/ /proc/bus 
+        sync 
+        ln -s /sys/kernel/debug/usb/devices /proc/bus/usb/devices 
+    * $ /opt/hpe/SystemTestManager/aksusbd &
+    * $ cat /proc/bus/usb/devices | grep HASP 
+## Run STM (1)
+    * SystemTestManager> view 
+## Start Testing (1)
+## Log Collection (2)
+## call 9 
+
 
 # Intel HVM tools
 * Download "Intel® HVM tools xx version Beta"
