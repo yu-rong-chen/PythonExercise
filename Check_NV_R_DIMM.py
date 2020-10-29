@@ -11,15 +11,18 @@ import certifi
 import html5lib  #pure-python library for parsing HTML
 import prettytable as pt
 import os #ask for current working directory
-
+import openpyxl
 
 driver = webdriver.Chrome()
 options = webdriver.ChromeOptions()
 driver.maximize_window()
+mypath='C:\\Users\\Administrator\\Pictures\\test\\iLoresource.xlsx'
+wb = openpyxl.Workbook()
+sheet=wb.get_sheet_by_name('Sheet')
 
 #----------------------------------------等待頁面加載--------------------------------------------------------------
 def WebdriverLoad(driver,WebPage):
-    delay=5
+    delay=20
     try:
         element = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH, WebPage)))
                                                            #invisibility_of_element_located
@@ -70,7 +73,7 @@ def Memory(driver,WebUrl):
     memory = title[0].index('Size')
     RNVDIMM_Memory=list();RDIMM_Memory=list();
     for i in range(1,len(rows)):
-        if rows[i][Technology] == 'RNVDIMM':
+        if rows[i][Technology] == 'NVDIMM-N':
             RNVDIMM_Memory.append(rows[i][memory])
         elif rows[i][Technology] == 'RDIMM':
             RDIMM_Memory.append(rows[i][memory])
@@ -81,6 +84,48 @@ def Memory(driver,WebUrl):
     return(RNVDIMM_Memory,RDIMM_Memory)
 
 
+#-------------------------------------Network------------------------------------------------------------
+def Network(driver,WebUrl):
+
+    disqus_iframe=driver.find_element_by_tag_name('iframe')
+    iframe_url = disqus_iframe.get_attribute('src')
+    # print(iframe_url)
+
+    WebUrl  = iframe_url
+
+    driver.get(WebUrl)
+    WebdriverLoad(driver,"//*[@id='tbl_network_ports']")
+
+    html = driver.page_source #To get the HTML for the whole page
+    
+    page = driver.execute_script('return document.body.innerHTML') 
+    soup = BeautifulSoup(''.join(page), 'html5lib')      #對html標籤進行解釋及分類的解析器
+    # print('\n--------I am Soup--------\n');print(soup)
+
+    TableName= ('tbl_network_ports')
+    table = soup.find('table', {'id': TableName})   
+    trs = table.find_all('tr')
+
+    # print('\n\n--------I am trs -------------\n');print(trs)
+
+    rows = list();title=list()
+    for tr in trs:
+        title.append([td.text.replace('\n', '').replace('\xa0', '') for td in tr.find_all('th')])
+        rows.append([td.text.replace('\n', '').replace('\xa0', '') for td in tr.find_all('td')])
+
+    # print('\n\n--------I am rows -------------\n');print(rows)
+    # print('\n\n--------I am title -------------\n');print(title)
+    Status = title[1].index('Status')
+    Port = title[1].index('Port')
+    IPv6 = title[1].index('IPv6 Address')
+
+    StatusOK=list()
+    for i in range(2,len(rows)):
+        StatusOK.append([rows[i][Status],rows[i][Port:IPv6]])
+  
+    title = driver.title
+    return StatusOK
+
 #------------------------------------------main-----------------------------------------------------------------
 
 UserName = ("Administrator")
@@ -89,7 +134,7 @@ UserPass = ("Compaq123")
 tb1 = pt.PrettyTable()
 tb1.field_names = ["IP", "RNVDIMM", "NV_Num", "RDIMM", "RD_Num"]
 ##Input = input("Choose sersion\na. Gen 8 and 9\nb. Gen 10:\n")
-Input='c'
+Input='b'
 if  Input == 'a':
     CWD=os.getcwd()
     F1 = open(CWD+"\\Gen89.txt")
@@ -106,12 +151,12 @@ elif Input == 'b':
     CWD=os.getcwd()
     F2 = open(CWD+"\\iLO.txt")
     Gen10 = F2.readline()
-    #Gen10 = input("Please input IP:\n")
+    # Gen10 = input("Please input IP:\n")
     
     while Gen10:
         print(Gen10)
-        i=i+1;
-        #WebUrl  = 'https://'+Gen10+'/'
+        i=i+1
+        # WebUrl  = 'https://'+Gen10+'/'
         WebUrl  = Gen10
         driver.get(WebUrl)
 
@@ -127,16 +172,30 @@ elif Input == 'b':
   
         driver.switch_to.default_content()
         
+        time.sleep(5)
+        WebdriverLoad(driver,"//*[@id='appFrame']")
         driver.switch_to.frame(driver.find_element_by_xpath("//*[@id='appFrame']"))
         WebdriverLoad(driver,"//*[@id='tabset_sysInfo']")
         driver.find_element_by_xpath("//*[@id='tabset_sysInfo']").click()
         driver.find_element_by_xpath("//*[@id='tab_mem']").click()
 
         [RNVDIMM_Memory,RDIMM_Memory]=Memory(driver,WebUrl)
+        #------------------------Network-----------------------------
+        driver.get(WebUrl)
+        driver.switch_to.frame(driver.find_element_by_xpath("//*[@id='appFrame']"))
+        WebdriverLoad(driver,"//*[@id='tabset_sysInfo']")
+        driver.find_element_by_xpath("//*[@id='tabset_sysInfo']").click()
+        driver.find_element_by_xpath("//*[@id='tab_nic']").click()
+        Netdata=Network(driver,WebUrl)
 
         tb1.add_row([Gen10,RNVDIMM_Memory,len(RNVDIMM_Memory),RDIMM_Memory[0],len(RDIMM_Memory)])
         
-        Gen10 = F2.readline()
+        sheet['A'+str(i)]= str(Gen10)
+        sheet['B'+str(i)] = str(Netdata)
+        wb.save(mypath) 
+
+        Gen10 = F2.readline() 
+
     print(tb1)
     driver.close()
     F2.close()
