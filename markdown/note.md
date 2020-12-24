@@ -49,6 +49,12 @@ Start container and execute job command:
 Create a container and start a Bash session
 `$docker run --name $ContainerName --rm -i -t $ImageName bash`
 
+Try another command:
+
+`$docker run -d -p 80:81 $ImageName `
+
+`$docker exec -it $ContainerID /bin/bash`
+
 Remove all containers: `docker rm $(docker ps -aq)`
 
 ## Run the container from the image on workstation

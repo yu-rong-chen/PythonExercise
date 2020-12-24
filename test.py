@@ -78,3 +78,29 @@
 # inventory=addInventory(inventory,dragonLoot)
 # displayInventory(inventory)
 
+# for i in range(1,10):
+#     try:
+#         z= int(input("%s, please enter a number" % i))
+#         break
+#     except ValueError:
+#         print("%s, try again" %i)
+
+class B(Exception):
+    pass
+
+class C(Exception):
+    pass
+
+class D(Exception):
+    pass
+
+for cls in [B, C, D]:
+    cls()
+    try:
+        raise cls()
+    except B:
+        print("B")
+    except D:
+        print("D")
+    except C:
+        print("C")
