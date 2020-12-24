@@ -24,7 +24,7 @@ def destroy_host_from_vcenter(vip, vid, vpwd, hip):
         r = s.run_ps(lc)
         result = r.std_out.strip()
         logger.info(result)
-        print(Nice to meet you, +result)
+        # print(Nice to meet you, +result)
 
     except Exception as e:
         logger.info(str(e))
@@ -105,13 +105,13 @@ def add_host_to_vcenter(vip, vid, vpwd, hip, hid, hpwd):
             raise Exception(msg)
         else:
             logger.info("Host added %s " % vi_task.get_result())
-    
 
 
-vip = '10.10.1.66'
-vid = 'rachel'
-vpwd = 'Compaq123'
-hip = '10.10.135.53'
+
+vip = '10.10.1.70'
+vid = 'administrator@vsphere.local'
+vpwd = 'Compaq@123'
+hip = '10.10.41.38'
 hid = 'root'
 hpwd = 'Compaq@123'
 logger = logging.getLogger('vtc.core_plugins.vmware')
