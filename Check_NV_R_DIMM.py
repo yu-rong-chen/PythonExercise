@@ -23,12 +23,15 @@ sheet=wb.get_sheet_by_name('Sheet')
 #----------------------------------------等待頁面加載--------------------------------------------------------------
 def WebdriverLoad(driver,WebPage):
     delay=20
-    try:
-        element = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH, WebPage)))
-                                                           #invisibility_of_element_located
-##        print ("Page is ready!")
-    except TimeoutException:
-        print ("Loading took too much time!")
+    while True:
+        try:
+            element = WebDriverWait(driver, delay).until(EC.visibility_of_element_located((By.XPATH, WebPage)))
+                                                            #invisibility_of_element_located
+            break
+    ##        print ("Page is ready!")
+        except TimeoutException:
+            raise Exception("Loading took too much time!")
+            continue
 #-------------------------------------Physical Memory------------------------------------------------------------
 def Memory(driver,WebUrl):
 
@@ -42,22 +45,22 @@ def Memory(driver,WebUrl):
     WebdriverLoad(driver,"//*[@id='memoryTableSMBios']")
 
     html = driver.page_source #To get the HTML for the whole page
-    
-    page = driver.execute_script('return document.body.innerHTML') 
+
+    page = driver.execute_script('return document.body.innerHTML')
     soup = BeautifulSoup(''.join(page), 'html5lib')      #對html標籤進行解釋及分類的解析器
 ##    print('\n--------I am Soup--------\n');print(soup)
 
 
                         #對html標籤進行解釋及分類的解析器
-##    verify=("C:/Users/chenyur/Python/Python36/Lib/site-packages/certs.pem")    
-##    res = requests.get(WebUrl,verify=False)              
+##    verify=("C:/Users/chenyur/Python/Python36/Lib/site-packages/certs.pem")
+##    res = requests.get(WebUrl,verify=False)
 ##    soup2 = BeautifulSoup(res.text,features="html5lib")   # only show <html><head></head><body></body></html>
 ##    print('\n--------I am Soup 2--------\n');print(soup2)
 ##    https://stackoverflow.com/questions/35905517/how-to-get-innerhtml-of-whole-page-in-selenium-driver#
 
-    
+
     TableName= ('memoryTableSMBios')
-    table = soup.find('table', {'id': TableName})   
+    table = soup.find('table', {'id': TableName})
     trs = table.find_all('tr')
 
 ##    print('\n\n--------I am trs -------------\n');print(trs)
@@ -77,10 +80,10 @@ def Memory(driver,WebUrl):
             RNVDIMM_Memory.append(rows[i][memory])
         elif rows[i][Technology] == 'RDIMM':
             RDIMM_Memory.append(rows[i][memory])
-  
+
     title = driver.title
-    print('Title is: ' + title) 
-        
+    print('Title is: ' + title)
+
     return(RNVDIMM_Memory,RDIMM_Memory)
 
 
@@ -97,13 +100,13 @@ def Network(driver,WebUrl):
     WebdriverLoad(driver,"//*[@id='tbl_network_ports']")
 
     html = driver.page_source #To get the HTML for the whole page
-    
-    page = driver.execute_script('return document.body.innerHTML') 
+
+    page = driver.execute_script('return document.body.innerHTML')
     soup = BeautifulSoup(''.join(page), 'html5lib')      #對html標籤進行解釋及分類的解析器
     # print('\n--------I am Soup--------\n');print(soup)
 
     TableName= ('tbl_network_ports')
-    table = soup.find('table', {'id': TableName})   
+    table = soup.find('table', {'id': TableName})
     trs = table.find_all('tr')
 
     # print('\n\n--------I am trs -------------\n');print(trs)
@@ -122,7 +125,7 @@ def Network(driver,WebUrl):
     StatusOK=list()
     for i in range(2,len(rows)):
         StatusOK.append([rows[i][Status],rows[i][Port:IPv6]])
-  
+
     title = driver.title
     return StatusOK
 
@@ -134,7 +137,7 @@ UserPass = ("Compaq123")
 tb1 = pt.PrettyTable()
 tb1.field_names = ["IP", "RNVDIMM", "NV_Num", "RDIMM", "RD_Num"]
 ##Input = input("Choose sersion\na. Gen 8 and 9\nb. Gen 10:\n")
-Input='b'
+Input='c'
 if  Input == 'a':
     CWD=os.getcwd()
     F1 = open(CWD+"\\Gen89.txt")
@@ -152,7 +155,7 @@ elif Input == 'b':
     F2 = open(CWD+"\\iLO.txt")
     Gen10 = F2.readline()
     # Gen10 = input("Please input IP:\n")
-    
+
     while Gen10:
         print(Gen10)
         i=i+1
@@ -169,9 +172,9 @@ elif Input == 'b':
         driver.find_element_by_xpath("//*[@id='username']").send_keys(UserName)
         driver.find_element_by_id('password').send_keys(UserPass)
         driver.find_element_by_xpath("//*[@id='login-form__submit']").click()
-  
+
         driver.switch_to.default_content()
-        
+
         time.sleep(5)
         WebdriverLoad(driver,"//*[@id='appFrame']")
         driver.switch_to.frame(driver.find_element_by_xpath("//*[@id='appFrame']"))
@@ -189,12 +192,12 @@ elif Input == 'b':
         Netdata=Network(driver,WebUrl)
 
         tb1.add_row([Gen10,RNVDIMM_Memory,len(RNVDIMM_Memory),RDIMM_Memory[0],len(RDIMM_Memory)])
-        
+
         sheet['A'+str(i)]= str(Gen10)
         sheet['B'+str(i)] = str(Netdata)
-        wb.save(mypath) 
+        wb.save(mypath)
 
-        Gen10 = F2.readline() 
+        Gen10 = F2.readline()
 
     print(tb1)
     driver.close()
@@ -226,7 +229,7 @@ elif Input == 'c':
         Gen10 = F2.readline()
         #-----open tab:
         main_window = driver.current_window_handle
-        driver.execute_script("window.open();") 
+        driver.execute_script("window.open();")
         driver.switch_to_window(driver.window_handles[i])
         #webdriver.ActionChains(driver).key_down(Keys.CONTROL).send_keys('t').key_up(Keys.CONTROL).perform() #Not work
     F2.close()
