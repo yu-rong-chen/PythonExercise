@@ -1,5 +1,5 @@
 # RDIMM_Memory=['32768 MB', '32768 MB', '32768 MB', '32768 MB', '32768 MB', '32768 MB', '32768 MB', '32768 MB']
-# B=list(map(int, ''.join([x if x.isdigit() else ' ' for x in str(RDIMM_Memory)]).split()))  # extract number from string   
+# B=list(map(int, ''.join([x if x.isdigit() else ' ' for x in str(RDIMM_Memory)]).split()))  # extract number from string
 # print(B)
 
 # for x in str(RDIMM_Memory):
@@ -40,7 +40,7 @@
 #     if inventory == '':
 #         break
 #     spam.append(inventory)
-# comma(spam)  
+# comma(spam)
 
 # grid=[['.','.','.','.','.','.'],
 #       ['.','0','0','.','.','.'],
@@ -78,3 +78,37 @@
 # inventory=addInventory(inventory,dragonLoot)
 # displayInventory(inventory)
 
+
+# def func():
+#     raise IOError
+# def this_fails():
+#     x=1/0
+# try:
+#     # func()
+#     this_fails()
+# except IOError as exc:
+#     print('Handling Error', exc)
+#     print('NO exc')
+#     raise RuntimeError('------------------------------------------HO----------------------------------')
+#     # raise RuntimeError('-----------------------------------------Failed to open database--------------') from exc
+# except ZeroDivisionError as error:
+#     print('Can not divise 0')
+#     print('Show error: ', error)
+#     # raise RuntimeError('Error')
+#     # raise RuntimeError('Error:', error)
+#     raise RuntimeError('Errorrr') from error
+
+# my_module.py
+
+class Complex:
+    def __init__(self,realpart,imagpart):
+        self.r=realpart
+        self.i=imagpart
+
+x=Complex(3.0,-4.5)
+x.counter=1
+while x.counter<10:
+    x.counter=x.counter*2
+    print(x.counter)
+print(x.counter)
+del x.counter
