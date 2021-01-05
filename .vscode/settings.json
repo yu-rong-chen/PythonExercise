@@ -1,0 +1,48 @@
+{
+    "window.menuBarVisibility": "default",
+    "window.zoomLevel": 1,
+    "workbench.tree.indent": 10,
+    "extensions.ignoreRecommendations": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.minimap.enabled": false,
+    "debug.toolBarLocation": "docked",
+    "workbench.iconTheme": "material-icon-theme",
+    //  change color https://www.crifan.com/vscode_emulat_source_insight_selected_text_background_highlight_yellow_color/
+    "workbench.colorCustomizations": {
+
+        "editor.selectionBackground": "#008b00",
+        "editor.selectionHighlightBackground": "#8B4513",
+        "editor.cursorStyle": "line",
+        "terminal.ansiBlack":"#1D2021",
+        "terminal.ansiBlue":"#5724ce",
+        "terminal.ansiBrightBlack":"#665C54",
+        "terminal.ansiBrightBlue":"#9a7ae4",
+        "terminal.ansiBrightCyan":"#8BA59B",
+        "terminal.ansiBrightGreen":"#58e923b7",
+        "terminal.ansiBrightMagenta":"#8F4673",
+        "terminal.ansiBrightRed":"#FB543F",
+        "terminal.ansiBrightWhite":"#f8f7f4",
+        "terminal.ansiBrightYellow":"#FAC03B",
+        "terminal.ansiCyan":"#8BA59B",
+        "terminal.ansiGreen":"#068d06",
+        "terminal.ansiMagenta":"#8F4673",
+        "terminal.ansiRed":"#FB543F",
+        "terminal.ansiWhite":"#f6f6f5",
+        "terminal.ansiYellow":"#FAC03B"
+    },
+    "remote.SSH.remotePlatform": {
+        "10.10.135.190": "linux",
+        "10.10.124.111": "linux",
+        "10.10.136.28": "linux",
+        "10.10.41.15": "linux"
+    },
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
+    "editor.multiCursorModifier": "ctrlCmd",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "python.pythonPath": "C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python36\\python.exe"
+}
