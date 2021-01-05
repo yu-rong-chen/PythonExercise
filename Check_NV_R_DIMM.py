@@ -137,7 +137,7 @@ UserPass = ("Compaq123")
 tb1 = pt.PrettyTable()
 tb1.field_names = ["IP", "RNVDIMM", "NV_Num", "RDIMM", "RD_Num"]
 ##Input = input("Choose sersion\na. Gen 8 and 9\nb. Gen 10:\n")
-Input='c'
+Input='b'
 if  Input == 'a':
     CWD=os.getcwd()
     F1 = open(CWD+"\\Gen89.txt")
