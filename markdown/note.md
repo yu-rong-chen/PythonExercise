@@ -40,8 +40,12 @@ Command: `docker tag $ImageID $username/$repository`
 
 ## Docker Run
 
-Start container command: 
-`$docker run --name $ContainerName`
+List container command:
+`$docker ps –a`
+
+Start container command: \
+`$docker run --name $ContainerName`\
+`docker run -t -d --name $ContainerName ${ImangeName}`
 
 Start container and execute job command: 
 `$docker run --name $ContainerName $ImageName robot test.robot`
@@ -53,8 +57,12 @@ Try another command:
 
 `$docker run -d -p 80:81 $ImageName `
 
-`$docker exec -it $ContainerID /bin/bash`
-
 Remove all containers: `docker rm $(docker ps -aq)`
+
+Start an exist container: `docker start ${container name}`
+
+Start a bash session in that container: \
+`$docker exec -it ${container name} bash`\
+`$docker exec -it $ContainerID /bin/bash`
 
 ## Run the container from the image on workstation
