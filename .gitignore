@@ -1,2 +1,4 @@
 password.py
-.vscode
+launch.json
+workspace.code-workspace*
+*.pyc

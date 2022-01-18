@@ -137,7 +137,8 @@ UserPass = ("Compaq123")
 tb1 = pt.PrettyTable()
 tb1.field_names = ["IP", "RNVDIMM", "NV_Num", "RDIMM", "RD_Num"]
 ##Input = input("Choose sersion\na. Gen 8 and 9\nb. Gen 10:\n")
-Input='b'
+# enter b to print vNDIM..
+Input='c'
 if  Input == 'a':
     CWD=os.getcwd()
     F1 = open(CWD+"\\Gen89.txt")
@@ -212,26 +213,34 @@ elif Input == 'c':
     #Gen10 = input("Please input IP:\n")
     while Gen10:
         print(Gen10)
-        i=i+1;
-        #WebUrl  = 'https://'+Gen10+'/'
-        WebUrl  = Gen10
-        driver.get(WebUrl)
+        try:
+            i=i+1;
+            #WebUrl  = 'https://'+Gen10+'/'
+            WebUrl  = Gen10
+            driver.get(WebUrl)
 
-        driver.find_element_by_xpath("//*[@id='details-button']").click()
-        WebdriverLoad(driver,"//*[@id='proceed-link']")
-        driver.find_element_by_xpath("//*[@id='proceed-link']").click()
+            driver.find_element_by_xpath("//*[@id='details-button']").click()
+            WebdriverLoad(driver,"//*[@id='proceed-link']")
+            driver.find_element_by_xpath("//*[@id='proceed-link']").click()
 
-        driver.switch_to.frame(driver.find_element_by_xpath("//*[@id='appFrame']"))
-        WebdriverLoad(driver,"//*[@id='username']")
-        driver.find_element_by_xpath("//*[@id='username']").send_keys(UserName)
-        driver.find_element_by_id('password').send_keys(UserPass)
-        driver.find_element_by_xpath("//*[@id='login-form__submit']").click()
-        Gen10 = F2.readline()
-        #-----open tab:
-        main_window = driver.current_window_handle
-        driver.execute_script("window.open();")
-        driver.switch_to_window(driver.window_handles[i])
-        #webdriver.ActionChains(driver).key_down(Keys.CONTROL).send_keys('t').key_up(Keys.CONTROL).perform() #Not work
+            driver.switch_to.frame(driver.find_element_by_xpath("//*[@id='appFrame']"))
+            WebdriverLoad(driver,"//*[@id='username']")
+            driver.find_element_by_xpath("//*[@id='username']").send_keys(UserName)
+            driver.find_element_by_id('password').send_keys(UserPass)
+            driver.find_element_by_xpath("//*[@id='login-form__submit']").click()
+            Gen10 = F2.readline()
+            #-----open tab:
+            main_window = driver.current_window_handle
+            driver.execute_script("window.open();")
+            driver.switch_to_window(driver.window_handles[i])
+            #webdriver.ActionChains(driver).key_down(Keys.CONTROL).send_keys('t').key_up(Keys.CONTROL).perform() #Not work
+        except Exception:
+            Gen10 = F2.readline()
+            #-----open tab:
+            main_window = driver.current_window_handle
+            driver.execute_script("window.open();")
+            driver.switch_to_window(driver.window_handles[i])
+            continue
     F2.close()
     Exitdriver = input("Do you want to close all windows?\n")
     if Exitdriver == 'yes':
