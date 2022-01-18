@@ -1,3 +1,4 @@
+//Please copy this setting.json to %APPDATA%\Code\User\settings.json
 {
     "window.menuBarVisibility": "default",
     "window.zoomLevel": 1,
@@ -9,10 +10,14 @@
     "workbench.iconTheme": "material-icon-theme",
     //  change color https://www.crifan.com/vscode_emulat_source_insight_selected_text_background_highlight_yellow_color/
     "workbench.colorCustomizations": {
-
+        "editor.lineHighlightBackground": "#010102",
         "editor.selectionBackground": "#008b00",
         "editor.selectionHighlightBackground": "#8B4513",
         "editor.cursorStyle": "line",
+        "editorLineNumber.foreground": "#f8f7f4",
+        "editorLineNumber.activeForeground": "#fdff6f",
+        "editorCursor.foreground": "#f8f7f4",
+        "terminalCursor.foreground": "#f8f7f4",
         "terminal.ansiBlack":"#1D2021",
         "terminal.ansiBlue":"#5724ce",
         "terminal.ansiBrightBlack":"#665C54",
@@ -25,7 +30,7 @@
         "terminal.ansiBrightYellow":"#FAC03B",
         "terminal.ansiCyan":"#8BA59B",
         "terminal.ansiGreen":"#068d06",
-        "terminal.ansiMagenta":"#8F4673",
+        "terminal.ansiMagenta":"#f30c9b",
         "terminal.ansiRed":"#FB543F",
         "terminal.ansiWhite":"#f6f6f5",
         "terminal.ansiYellow":"#FAC03B"
@@ -44,5 +49,18 @@
     ],
     "editor.multiCursorModifier": "ctrlCmd",
     "diffEditor.ignoreTrimWhitespace": false,
+    "zenMode.hideLineNumbers": false,
+    "zenMode.hideStatusBar": false,
+    "http.proxy": "http://web-proxy.sgp.hpecorp.net:8080/",
+    "terminal.integrated.fontFamily": "monospace",
+    "editor.suggest.snippetsPreventQuickSuggestions": true,
+    "workbench.editor.enablePreview": false,
+    "diffEditor.renderSideBySide": true,
+    "python.languageServer": "Jedi",
+    "workbench.activityBar.visible": true,
+    "gitlens.advanced.fileHistoryShowAllBranches": true,
+    "gitlens.hovers.currentLine.enabled": false,
+    "gitlens.mode.active": "review",
+    "git.ignoreMissingGitWarning": true,
     "python.pythonPath": "C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python36\\python.exe"
 }
