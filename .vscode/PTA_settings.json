@@ -1,0 +1,39 @@
+{
+    "python.pythonPath": "/home/rachel/Documents/vtc-test/PTA/bin/python3",
+    "python.venvPath": "bin/",
+    "python.terminal.activateEnvironment": true,
+    "restructuredtext.confPath": "",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.pylintUseMinimalCheckers": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+        "--max-line-length=99",
+        "--max-complexity=10",
+        "--exclude=.svn,CVS,.bzr,.hg,.git,__pycache__,.tox,.eggs,*.egg,",
+        "--enable-extensions=E999,C901",
+    ],
+    "python.languageServer": "Jedi",
+    "python.linting.pydocstyleEnabled": false,
+    "python.linting.pycodestyleEnabled": false,
+    "python.linting.pycodestyleArgs": [
+        "--max-line-length=99",
+    ],
+    "python.linting.pylintArgs": [
+        "--disable=import-error, missing-module-docstring, missing-class-docstring, missing-function-docstring"
+    ],
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./PlatformTestAuto",
+        "-p",
+        "test_*.py"
+    ],
+    "python.testing.pytestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.unittestEnabled": true,
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.pyc/*/**": true
+    },
+}

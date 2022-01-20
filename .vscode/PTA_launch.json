@@ -1,0 +1,40 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/${relativeFile}",
+            "console": "integratedTerminal",
+            // "args": [
+            //     "-j", "/root/Documents/ILOREST/HPREST_AUTO/mat.json",
+            //     "-c", "1",
+            //     "-m", "auto12",
+            //     "-s", "hs"
+            // ],
+        },
+        {
+            "type": "robot",
+            "request": "launch",
+            "name": "Robotframework Debugger",
+            "program": "${workspaceFolder}/${relativeFile}",
+            "WorkingDirectory": "${workspaceFolder}/${relativeFile}",
+            "stopOnEntry": true,
+            "arguments": "-d /home/rachel/Documents/vtc-test/PTA/PlatformTestAuto/reports -V /home/rachel/Documents/vtc-test/PTA/PlatformTestAuto/variables/ilorest.yaml",
+            "libraries": [
+                "${workspaceFolder}"
+            ],
+            "variables": [
+                {
+                    "Name": "RobotVariable",
+                    "Value": "data"
+                }
+            ],
+            "PythonPath": "/home/rachel/Documents/vtc-test/PTA/bin/python3"
+        }
+    ]
+}
