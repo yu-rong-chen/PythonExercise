@@ -61,5 +61,11 @@
     "gitlens.hovers.currentLine.enabled": false,
     "gitlens.mode.active": "review",
     "git.ignoreMissingGitWarning": true,
-    "python.pythonPath": "C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python36\\python.exe"
+    "python.pythonPath": "C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python36\\python.exe",
+    "editor.lineNumbers": "relative",
+    "pasteImage.path": "C:\\Users\\chenyur\\Documents\\PTA\\devops\\jenkins\\images",
+    "pasteImage.basePath": "C:\\Users\\chenyur\\Documents\\PTA\\devops\\jenkins",
+    "pasteImage.forceUnixStyleSeparator": true,
+    "pasteImage.showFilePathConfirmInputBox": true,
+    "pasteImage.filePathConfirmInputBoxMode": "onlyName"
 }
