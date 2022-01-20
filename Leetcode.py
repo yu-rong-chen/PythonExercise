@@ -238,7 +238,7 @@
 # print(matrix)
 
 #----------------Leetcode 63
-A= [[0,0,0],[0,1,0],[0,0,0],[1,1,0]]
+# A= [[0,0,0],[0,1,0],[0,0,0],[1,1,0]]
 # A = [[0,0]]
 # matrix =A
 # m = len(A)
@@ -476,8 +476,8 @@ class Node:
 # return n & (n+1)
 
 #----------Leetcode 67 Add Binary
-A = '1010'
-B = '101101'
+# A = '1010'
+# B = '101101'
 
 # i,j = len(A)-1, len(B)-1
 # res, c = [],'0'
@@ -496,7 +496,48 @@ B = '101101'
 # print(''.join(res[::-1]))
 
 # Leetcode 680 valid Palindrom II
-S = 'abca'
-i, j = 0, len(S)-1
+#------recursive----
+def validPalindrime(S):
+    def isp(s,l,r):
+        while l < r:
+            if s[l] != s[r]: return False
+            l,r = l+1, r-1
+        return True
+    i, j = 0, len(S)-1
+    while i < j:
+        if S[i] != S[j]:
+            return isp(S, i+1,j) or isp(S, i,j-1)
+        i, j = i + 1, j - 1
+    return True
 
-Change repository
+#----------iterative-------<not finish>
+def validPalindrome(S):
+    i,j = 0, len(S)-1
+    k=0
+    while i<j:
+        if S[i] != S[j]:
+            k=k+1
+            if k > 1:
+                return False
+            if S[i+1] == S[j]:
+                i = i+1
+            elif S[i] == S[j-1]:
+                j = j-1
+            else:
+                return False
+        else:
+            i, j=i+1, j-1
+    return True
+
+# S = 'aguokepatgbnvfqmgmlcuuculmgmqfvnbgtapekouga'
+# S = 'aba'
+# S = 'abc'
+# S = 'abca'
+# # A = validPalindrime(S)
+# A = validPalindrome(S)
+# print(A)
+
+#------Leetcode 926-------------
+s = '101010'
+for ch in s:
+    print(ch)

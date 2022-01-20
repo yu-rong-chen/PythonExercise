@@ -66,3 +66,8 @@ Start a bash session in that container: \
 `$docker exec -it $ContainerID /bin/bash`
 
 ## Run the container from the image on workstation
+
+
+## Docker Compose
+[Flask 實作 Docker-compose (Flask+Nginx+PostgreSQL)](https://www.maxlist.xyz/2020/06/14/flask-docker-compose/)\
+`$docker-compose up --build`
