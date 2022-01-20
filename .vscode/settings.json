@@ -1,7 +1,6 @@
 //Please copy this setting.json to %APPDATA%\Code\User\settings.json
 {
     "window.menuBarVisibility": "default",
-    "window.zoomLevel": 1,
     "workbench.tree.indent": 10,
     "extensions.ignoreRecommendations": true,
     "files.trimTrailingWhitespace": true,
