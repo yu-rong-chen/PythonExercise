@@ -1,0 +1,41 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"python.pythonPath": "bin/python3",
+		"emeraldwalk.runonsave": {
+			"autoClearConsole": true,
+			"commands": [
+				{
+					"match": "\\.py$",
+						"cmd": "cd /home/rachel/Documents/vtc-test/PTA/; . bin/activate; cp empty-cov.xml cov.xml; coverage run -m unittest discover -p \"*test_*.py\" -f -s \"PlatformTestAuto\"; coverage xml -o cov.xml; coverage report -m"
+				}
+			]
+		},
+		"python.linting.flake8Path": "/home/rachel/Documents/vtc-test/PTA/bin/flake8",
+		"code-review.filterCommentsByCommit": true,
+		"code-review.priorities": [
+			"low",
+			"medium",
+			"high",
+			"None"
+		],
+		"code-review.reportWithCodeSelection": true,
+		"code-review.categories": [
+			"Architecture",
+			"Best Practices",
+			"Code-Style",
+			"Complexity",
+			"Error Handling",
+			"Maintainability",
+			"Performance",
+			"Reliability",
+			"Separation of concerns",
+			"Notes"
+		],
+		"editor.lineNumbers": "relative"
+	}
+}
