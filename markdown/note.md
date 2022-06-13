@@ -23,6 +23,9 @@ Remove all images: `docker rmi $(docker images -aq)`
     Docker login command: `docker login -u yu-rong-chen -p $token_id docker.pkg.github.com`
 
 * Create repository on Docker Hub
+    Error will pop if user didn't login: 
+        "You have reached your pull rate limit. You may increase the limit by authenticating and upgrading: https://www.docker.com/increase-rate-limit"
+            ![image](https://user-images.githubusercontent.com/52913327/173291575-d0bca5d8-c9e7-4061-8a9c-93a907050b80.png)
     Log in Docker: `docker login ` and enter Docker Hub username and password
     Push to repository `docker push $Hub_username/$repository `
 
