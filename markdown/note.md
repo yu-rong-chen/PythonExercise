@@ -30,8 +30,13 @@ Remove all images: `docker rmi $(docker images -aq)`
         
     ![image](https://user-images.githubusercontent.com/52913327/173291575-d0bca5d8-c9e7-4061-8a9c-93a907050b80.png)
     
-    Log in Docker: `docker login ` and enter Docker Hub username and password
-    Push to repository `docker push $Hub_username/$repository `
+    * Log in Docker: `docker login ` and enter Docker Hub username and password
+    * Push to repository `docker push $Hub_username/$repository `
+    * To run docker command without sudo, you need to add your user to docker group. 
+        
+        `sudo groupadd docker`
+        `sudo gpasswd -a $USER docker`. 
+        Reboot VM
 
 If docker push failed, you need to tag first
     ![Docker,push failed](image/docker_push_failed.png)
