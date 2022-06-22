@@ -15,7 +15,9 @@
    <prep><code>ssh USER@HOST 'mkdir -p ~/.ssh;cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_rsa.pub</code></prep>
 2. <p>Using comand <code>ssh-copy-id</code>
    <prep><code>ssh-copy-id USER@HOST</code></prep>
-   > set `PasswordAuthentication yes` in /etc/ssh/ssh_config first
+   
+      > set `PasswordAuthentication yes` in /etc/ssh/ssh_config first
+   
    <prep><code>ssh-copy-id -i ~/.ssh/id_rsa.pub -p PORTs USER@HOST</code> to specify the key</prep>
 
 <p>The more safer way for SSH login is forbidden using password to login and only allow login by ssh key. Change the setting in <code>/etc/ssh/sshd_config</code>
