@@ -11,7 +11,7 @@
 <pre><code>ssh-keygen</code></pre>
 
    * Generating multiple public/private rsa key pair:`ssh-keygen -C $github_mail`
-   * start ssh-agent before you run the ssh-add command: ```eval `ssh-agent -s````
+   * start ssh-agent before you run the ssh-add command: <prep><code>eval `ssh-agent -s`</code></prep>
    * If you see *Permission denied (publickey).*, please add your SSH (private) key to the ssh-agent: `ssh-add ~/.ssh/github/id_rsa`.
    * Check with `ssh -vT git@github.com`
 
