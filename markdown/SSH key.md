@@ -26,7 +26,7 @@
    
    <prep><code>ssh-copy-id -i ~/.ssh/id_rsa.pub -p PORTs USER@HOST</code> to specify the key</prep>
 
-3. For winodws Powershel: `type $env:Rachel_Chen2\Users\Rachel_Chen2\.ssh\vdi\id_rsa.pub | ssh -p 22153 mystic@10.124.95.13 "cat >> ~/.ssh/authorized_keys"`
+3. For winodws Powershell: `type $env:Rachel_Chen2\Users\Rachel_Chen2\.ssh\vdi\id_rsa.pub | ssh -p 22153 mystic@10.124.95.13 "cat >> ~/.ssh/authorized_keys"`.
   Please check `authorized_keys` file permissions
 <p>The more safer way for SSH login is forbidden using password to login and only allow login by ssh key. Change the setting in <code>/etc/ssh/sshd_config</code>
 <pre><code>PasswordAuthentication no
