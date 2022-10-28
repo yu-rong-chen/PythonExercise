@@ -28,7 +28,16 @@
 
 3. For winodws Powershell: `type $env:Rachel_Chen2\Users\Rachel_Chen2\.ssh\vdi\id_rsa.pub | ssh -p 22153 mystic@10.124.95.13 "cat >> ~/.ssh/authorized_keys"`.
   Please check `authorized_keys` file permissions
-<p>The more safer way for SSH login is forbidden using password to login and only allow login by ssh key. Change the setting in <code>/etc/ssh/sshd_config</code>
+4. Add `IdentityFile` in `C:\Users\Rachel_Chen2\.ssh\config`
+```
+Host my-vdi
+    HostName 10.124.95.13
+    User mystic
+    Port 22153
+    IdentityFile C:\Users\Rachel_Chen2\.ssh\vdi\id_rsa
+    IdentitiesOnly yes
+```
+<p>The more safer way for SSH login is forbidden using password to login and only allow login by ssh key. Change the setting in <code>/etc/ssh/ssh_config</code>
 <pre><code>PasswordAuthentication no
 PubkeyAuthentication yes</code></pre> 
 <p>Restart <code>sshd</code>. <code>/etc/init.d/sshd restart</code>
